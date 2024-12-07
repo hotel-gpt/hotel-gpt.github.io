@@ -46,19 +46,19 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 
   <!-- Slideshow -->
   <div class="w3-container">
-    <div class="w3-display-container mySlides">
+    <div class="w3-display-container intoSlides">
       <img src="coffee.jpg" style="width:100%">
       <div class="w3-display-topleft w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Save time for your coffee break</span>
       </div>
     </div>
-    <div class="w3-display-container mySlides">
+    <div class="w3-display-container intoSlides">
       <img src="workbench.jpg" style="width:100%">
       <div class="w3-display-middle w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Focus on what matters</span>
       </div>
     </div>
-    <div class="w3-display-container mySlides">
+    <div class="w3-display-container intoSlides">
       <img src="sound.jpg" style="width:100%">
       <div class="w3-display-topright w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Listen to customers differently</span>
@@ -71,9 +71,9 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
       <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
     
       <div class="w3-center">
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1, 'intoSlides', 'intodots')"></span>
+        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2, 'intoSlides', 'intodots')"></span>
+        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3, 'intoSlides', 'intodots')"></span>
       </div>
     </div>
   </div>
@@ -111,19 +111,19 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
       <p>See the transformation in action—explore these screenshots showcasing how Hotel-GPT crafts personalized, brand-aligned responses after learning from your hotel’s unique communication style.</p>
     </div>
 
-    <div class="w3-display-container mySlides">
+    <div class="w3-display-container demoSlides">
       <img src="review-oc.jpg" style="width:100%">
       <div class="w3-display-topleft w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">The original review</span>
       </div>
     </div>
-    <div class="w3-display-container mySlides">
+    <div class="w3-display-container demoSlides">
       <img src="answer-oc.jpg" style="width:100%">
       <div class="w3-display-middle w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">The original answer</span>
       </div>
     </div>
-    <div class="w3-display-container mySlides">
+    <div class="w3-display-container demoSlides">
       <img src="chatbot-oc.jpg" style="width:100%">
       <div class="w3-display-topright w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">The generated answer</span>
@@ -136,9 +136,9 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
       <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
     
       <div class="w3-center">
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1, 'demoSlides', 'demodots')"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2, 'demoSlides', 'demodots')"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3, 'demoSlides', 'demodots')"></span>
       </div>
     </div>
   </div>
@@ -206,21 +206,23 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 
 <script>
 // Slideshow
-var slideIndex = 1;
-showDivs(slideIndex);
+var intoSlideIndex = 1;
+showDivs(intoSlideIndex, "intoSlides", "intodots");
+var demoSlideIndex = 1;
+showDivs(demoSlideIndex, "demoSlides", "demodots");
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
+function plusDivs(n, name, name_dots) {
+  showDivs(slideIndex += n, name, name_dots);
 }
 
-function currentDiv(n) {
-  showDivs(slideIndex = n);
+function currentDiv(n, name, name_dots) {
+  showDivs(slideIndex = n, name, name_dots);
 }
 
-function showDivs(n) {
+function showDivs(n, name, name_dots) {
   var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demodots");
+  var x = document.getElementsByClassName(name);
+  var dots = document.getElementsByClassName(name_dots);
   if (n > x.length) {slideIndex = 1}    
   if (n < 1) {slideIndex = x.length} ;
   for (i = 0; i < x.length; i++) {
