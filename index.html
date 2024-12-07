@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="style.css">
 <style>
 html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 .mySlides {display:none}
@@ -67,13 +66,13 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 
     <!-- Slideshow next/previous buttons -->
     <div class="w3-container w3-dark-grey w3-padding w3-xlarge">
-      <div class="w3-left" onclick="plusDivs(-1, 'intoSlides', 'intodots')"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
-      <div class="w3-right" onclick="plusDivs(1, 'intoSlides', 'intodots')"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
+      <div class="w3-left" onclick="plusDivs(-1, 'into')"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
+      <div class="w3-right" onclick="plusDivs(1, 'into')"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
     
       <div class="w3-center">
-        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1, 'intoSlides', 'intodots')"></span>
-        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2, 'intoSlides', 'intodots')"></span>
-        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3, 'intoSlides', 'intodots')"></span>
+        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1, 'into')"></span>
+        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2, 'into')"></span>
+        <span class="w3-tag intodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3, 'into')"></span>
       </div>
     </div>
   </div>
@@ -132,13 +131,13 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 
     <!-- Slideshow next/previous buttons -->
     <div class="w3-container w3-dark-grey w3-padding w3-xlarge">
-      <div class="w3-left" onclick="plusDivs(-1, 'demoSlides', 'demodots')"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
-      <div class="w3-right" onclick="plusDivs(1, 'demoSlides', 'demodots')"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
+      <div class="w3-left" onclick="plusDivs(-1, 'demo')"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
+      <div class="w3-right" onclick="plusDivs(1, 'demo')"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
     
       <div class="w3-center">
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1, 'demoSlides', 'demodots')"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2, 'demoSlides', 'demodots')"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3, 'demoSlides', 'demodots')"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1, 'demo')"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2, 'demo')"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3, 'demo')"></span>
       </div>
     </div>
   </div>
@@ -206,33 +205,34 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 
 <script>
 // Slideshow
-var intoSlideIndex = 1;
+var intoIndex = 1;
+var demoIndex = 1;
+
 showDivs(intoSlideIndex, "intoSlides", "intodots");
-var demoSlideIndex = 1;
 showDivs(demoSlideIndex, "demoSlides", "demodots");
 
-function plusDivs(n, name, name_dots) {
-  showDivs(slideIndex += n, name, name_dots);
+function plusDivs(n, name) {
+  showDivs(window[name + "Index"] += n, name);
 }
 
-function currentDiv(n, name, name_dots) {
-  showDivs(slideIndex = n, name, name_dots);
+function currentDiv(n, name) {
+  showDivs(window[name + "Index"] = n, name, name_dots);
 }
 
-function showDivs(n, name, name_dots) {
+function showDivs(n, name) {
   var i;
-  var x = document.getElementsByClassName(name);
-  var dots = document.getElementsByClassName(name_dots);
-  if (n > x.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = x.length} ;
+  var x = document.getElementsByClassName(name + "Slides");
+  var dots = document.getElementsByClassName(name + "Dots");
+  if (n > x.length) {window[name + "Index"] = 1}    
+  if (n < 1) {window[name + "Index"] = x.length} ;
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";  
   }
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" w3-white", "");
   }
-  x[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " w3-white";
+  x[window[name + "Index"]-1].style.display = "block";  
+  dots[window[name + "Index"]-1].className += " w3-white";
 }
 </script>
 
